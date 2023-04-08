@@ -1,0 +1,64 @@
+{% macro paste_post() %}
+<div class="card-list" style="box-shadow: rgba(99, 99, 99, 0.2) 0 16px 16px 0 ;" >
+	<article class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0 16px 16px 0 ;">
+        <figure class="card-image" data-toggle="modal" data-target="#exampleModal">
+            <img src="https://rukminim1.flixcart.com/image/416/416/xif0q/mobile/e/l/d/-original-imagnhusa2upmgeq.jpeg?q=70" />
+        </figure>
+        <div class="card-head">
+            <a href="#" style="font-size: 1.4rem; color: black; text-decoration: none; background-color: white;">When life gives you oranges</a>
+            <button type="button" class="icon-button" id="bookmark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
+                    <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
+                </svg>
+
+            </button>
+        </div>
+        <div class="card-foot">
+            <div class="card-meta">
+                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                10
+            </div>
+            <div class="card-meta space-left">
+                <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                49
+            </div>
+            <div class="card-meta space-left" id="cart">
+                <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block">
+                    <circle cx="10" cy="20.5" r="1"/>
+                    <circle cx="18" cy="20.5" r="1"/>
+                    <path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"/>
+                </svg>
+                1200
+
+            </div>
+            <div class="card-meta space-left"  >
+                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                245
+
+            </div>
+        </div>
+    </article>
+</div>
+<script type="text/javascript" src="https://smac01.github.io/js/minieditor.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
+<script type="text/javascript">
+    var count=false;
+    $("button").click(function(){
+        if(!count){
+            $(this).addClass("saved");
+            count=true;
+        }
+        else{
+            $(this).removeClass("saved");
+            count=false;
+        }
+
+    });
+
+
+
+
+</script>
+
+{% endmacro %}
