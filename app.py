@@ -1,92 +1,50 @@
-import nltk
+from flask import request
 from flask import Flask, render_template
-from collections import Counter
-from nltk.corpus import stopwords
-import numpy as np
+from db import get_data, create_query, db_api
+
 app = Flask(__name__)
 
 
-def df_maker(df, pname):
-    p_df = df.loc[df['title'] == pname]
-    return p_df
-
-
-def df_filter(df, flag):
-    if flag == 0:
-        return df[df.rating <= 3]
-    else:
-        return df[df.rating > 3]
-
-
-def word_breaker(li, stopword):
-    newr = []
-    for i in li:
-        newr.append(i.lower())
-
-    filtered_words = []
-    # stop word removal
-    for ele in newr:
-        if ele not in stopword:
-            filtered_words.append(ele)
-
-    fil = [word for word in filtered_words if word not in stopwords.words('english')]
-    sno = nltk.stem.SnowballStemmer('english')
-    sm = []
-    for i in fil:
-        # stemming
-        sm.append(sno.stem(i))
-
-    return sm
-
-
-def word_finder(df, col):
-    li = df[col].tolist()
-    tokenr = []
-    for ele in li:
-        # tokenize
-        tokenr.append(np.array(nltk.word_tokenize(ele)))
-
-    mat = np.array(tokenr)
-    out = np.concatenate(mat).ravel().tolist()
-    # change 'stopword' -> stopword
-    word_list = word_breaker(out, 'stopword')
-    if col == 'promise':
-        # remove duplicates from desc
-        word_list = set(word_list)
-        word_list = list(word_list)
-
-    return word_list
-
-
-def match(desc_li, rev_li):
-    # hash table
-    hash_match = {}
-    for word in desc_li:
-        if rev_li.count(word) > 1:
-            if hash_match.get(word) is None:
-                hash_match[word] = rev_li.count(word)
-    # number of matched words / total words in desc = ratio of delivery
-    return len(hash_match)/len(desc_li)
-
-
-@app.route("/", methods=["POST", "GET"])
+@app.route("/", methods=["GET"])
 def index():
-    return render_template('base.html')
+    button_value = request.args.get('button_value')
+    print(button_value)
+    low = 0
+    table = 'products'
+    # loading in browser
+    if button_value is None:
+        low = 0
+    else:
+        low = (int(button_value)-1)*30
+        # 60
+    sql = create_query(low, 30)
+    db_api(sql, 'C:\scoutlab\data\post.json')
+    data = get_data('C:\scoutlab\data\post.json')
+    return render_template('index.html', data=data)
 
 
 @app.route("/rankings", methods=['GET', 'POST'])
 def rankings():
-    return render_template('rankings.html')
+    sql = "select pid, pname, r_score  from products order by r_score DESC limit 10"
+    db_api(sql, 'data/rankings.json')
+    ranks = get_data('data/rankings.json')
+    return render_template('rankings.html', ranks=ranks)
 
 
 @app.route("/reviews", methods=['GET', 'POST'])
 def reviews():
-    return render_template('reviews.html')
+    sql = "select pid, pname, rcount  from products order by rcount DESC limit 10"
+    db_api(sql, 'data/rankings.json')
+    review = get_data('data/rankings.json')
+    return render_template('reviews.html', review=review)
 
 
 @app.route("/pos-neg", methods=['GET', 'POST'])
 def pos_neg():
-    return render_template('pos_neg.html')
+    sql = "select pid,pname,pos_count,neg_count,(pos_count-neg_count) as diff from products order by diff DESC limit 10"
+    db_api(sql, 'data/rankings.json')
+    diff = get_data('data/rankings.json')
+    return render_template('pos_neg.html', diff=diff)
 
 
 @app.route("/user-opinions", methods=['GET', 'POST'])
@@ -94,5 +52,23 @@ def user_opinions():
     return render_template('user_opinions.html')
 
 
+@app.route("/product", methods=['GET', 'POST'])
+def product():
+    val_ = request.form['product_name']
+    sql_ = ("select * from products left join links on products.pid=links.pid where instr(pname, '%s') > 0" % val_)
+    db_api(sql_, "data/search.json")
+    data = get_data("data/search.json")
+    print(data)
+    return render_template('index.html', data=data)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # your processing here
+    return render_template('page404.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000, use_reloader=False)
+
+

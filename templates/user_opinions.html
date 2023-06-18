@@ -16,76 +16,55 @@
     <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
   </head>
   <body>
-        <nav class="navbar sticky-top navbar-expand-custom navbar-mainbg">
-        <a class="navbar-brand navbar-logo ml-4" href="{{ url_for('index') }}">Scout Lab</a>
-        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link act" href="javascript:void(0);"><i class="far fa-address-book"></i>Login</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Feed back</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>About us</a>
-                </li>
-            </ul>
+        <div id="header">
+	        <nav class="navbar navbar-expand-md fixed-top" style="margin-bottom: 2px;">
+		<div class="navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav" style="text-shadow: 0 16px 24px -12px rgba(0,0,0 ,0.15);">
+				<li class="nav-item">
+					<a class="nav-link active"  aria-current="page" href="/">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/">Shop</a>
+				</li>
+			</ul>
+			<div class="navbar-brand d-none d-lg-block">
+				<a href="/"><h2 class="logo center-logo"><strong>Scoutlab</strong></h2></a>
+			</div>
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/">Blog</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/">About us</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+            <div class="" style="width:100%;  height:68px; display:block; box-shadow: 0 16px 24px -12px rgba(0,0,0 ,0.15); padding:0px; margin: 0px;"></div>
         </div>
-    </nav>
-        <div class="container">
-            <h1>Users opinions</h1>
-            <div>
-                <h5>Most common words:</h5>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">Word</th>
-                      <th scope="col">Frequency</th>
-                      <th scope="col">Percentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for i in range(11) %}
-                        <tr>
-                          <td>{{[0]}}</td>
-                          <td>{{[1]}}</td>
-                          <td>{{[2]}}%</td>
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
+        <div class="container ">
+            <div class="mt-4">
+                <div class="form-box  ">
+                  <h1 class="text-center coral-theme" >Share your review</h1><br>
+                  <form action="/user_opinions" method="post">
+                    <div class="form-group">
+                      <label for="name" class="coral-theme">Product Name</label>
+                      <input class="form-control form-focus" id="name" type="text" name="Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="rating" class="coral-theme">Rating</label>
+                      <input class="form-control form-focus" id="rating" type="number" name="rating">
+                    </div>
+                    <div class="form-group">
+                      <label for="Review" class="coral-theme">Review</label>
+                      <textarea class="form-control form-focus" id="Review" name="Review"></textarea>
+                    </div><div>
+                        <input class="btn coral-bg  text-light" type="submit" value="Submit" />
+                    </div>
+                  </form>
+                </div>
             </div>
-            <hr>
-            <div>
-                <h5>Most common tags used by customers:</h5>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">Word</th>
-                      <th scope="col">Frequency</th>
-                      <th scope="col">Percentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for i in range(11) %}
-                        <tr>
-                          <td>{{[0]}}</td>
-                          <td>{{[1]}}</td>
-                          <td>{{[2]}}%</td>
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
 
-            </div>
         </div>
 
 
@@ -152,7 +131,5 @@
         });
 
     </script>
-
-
   </body>
 </html>

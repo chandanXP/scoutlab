@@ -1,44 +1,137 @@
-{% macro paste_post() %}
-<div class="card-list" style="box-shadow: rgba(99, 99, 99, 0.2) 0 16px 16px 0 ;" >
+{% macro paste_post(rank, name, efficiency, reviews, recommendation_score, display_photo) %}
+<!-- Modal -->
+<div class="modal fade mb-6" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 10000; width:100vw;">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="con ">
+                <div class="icon ">
+                    <article class="modal-card ">
+                        <figure class="card-image">
+                        <img src="{{display_photo}}" alt="Image not available!" />
+                    </figure>
+                    </article>
+                    <div class="share fill">
+                        <div class="modal-card  fill">
+                            <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zM3.8 6h16.4M16 10a4 4 0 1 1-8 0"/></svg>
+                             <a href="#" class="text-decoration-none text-success"><span class="text-center">Buy</span></a>
+                        </div>
+                        <div class="modal-card  fill">
+                            <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            <a href="#" title="share" class="text-decoration-none text-info" onclick="copyToClipboard('#p1')"> <span class="text-center " >Share</span></a>
+                        </div>
+                    </div>
+                    <div class="rank">
+                        <div class="card-meta" >
+                            <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <h3 style="margin-left: .1rem; margin-bottom:0px;">{{rank}}</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="desc">
+                    <article class="modal-card ">
+                        <div class="card-head">
+                            <a href="#" class="text-decoration-none display-6 text-dark">{{name[:20]}}...</a>
+                        </div>
+                    </article >
+                    <div class=" fill">
+                        <div class="modal-card  fill">
+                            <div class="secinfo">
+                                <div style="display: block;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                </div>
+                                <p>{{reviews}}</p>
+                                <span>Reviews</span>
+                            </div>
+                        </div>
+                        <div class="modal-card  fill">
+                        <div class="secinfo">
+                            <div style="display: block;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H4.2"/></svg>
+                            </div>
+                            <p>220</p>
+                            <span>Good-Bad</span>
+                        </div>
+                    </div>
+                        <div class="modal-card  fill">
+                        <div class="secinfo">
+                            <div style="display: block;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <p>{{recommendation_score}}</p>
+                                <span>Suggestions</span>
+                        </div>
+                    </div>
+                        <div class="modal-card  fill">
+                        <div class="secinfo">
+                            <div style="display: block;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <p>{{efficiency}}</p>
+                            <span>Assurance</span>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="fill">
+                        <div class="  modal-card  fill">
+                            <span class="text-success mr-4"> Battery, Design, Color |  </span>
+                            <span class="text-danger mr-4"> Gaming, Audio, Bass |</span>
+                            <span class="text-secondary mr-4"> Gaming, Good, Worth </span>
+                        </div>
+
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer coral-theme">
+            <button type="button" class="btn" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="card-list posts"  style="box-shadow: rgba(99, 99, 99, 0.2) 0 16px 16px 0 ; " >
 	<article class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0 16px 16px 0 ;">
-        <figure class="card-image" data-toggle="modal" data-target="#exampleModal">
-            <img src="https://rukminim1.flixcart.com/image/416/416/xif0q/mobile/e/l/d/-original-imagnhusa2upmgeq.jpeg?q=70" />
+        <figure style="cursor: pointer;" class="card-image" >
+            <img src="{{display_photo}}" alt="Image not available!"/>
         </figure>
-        <div class="card-head">
-            <a href="#" style="font-size: 1.4rem; color: black; text-decoration: none; background-color: white;">When life gives you oranges</a>
+        <div class="card-head" style="cursor: pointer;">
+            <p class="text-capitalize" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 1rem;  color:	#385a7c; margin-bottom: 0px; background-color: white;">{{ name }}</p>
             <button type="button" class="icon-button" id="bookmark">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
                     <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
                 </svg>
-
             </button>
         </div>
         <div class="card-foot">
-            <div class="card-meta">
-                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                10
+            <div class="card-meta" style="cursor: pointer;">
+                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem; " width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                {{rank}}
             </div>
-            <div class="card-meta space-left">
-                <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                49
+            <div class="card-meta space-left" style="cursor: pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem; " width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                {{efficiency}}
             </div>
-            <div class="card-meta space-left" id="cart">
-                <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block">
+            <div class="card-meta space-left" id="cart" style="cursor: pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem; " width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block">
                     <circle cx="10" cy="20.5" r="1"/>
                     <circle cx="18" cy="20.5" r="1"/>
                     <path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"/>
                 </svg>
-                1200
+                {{reviews}}
 
             </div>
-            <div class="card-meta space-left"  >
-                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                245
+            <div class="card-meta space-left"  style="cursor: pointer;">
+                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:0.4rem; " width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                {{recommendation_score}}
 
             </div>
         </div>
     </article>
 </div>
+
 <script type="text/javascript" src="https://smac01.github.io/js/minieditor.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
@@ -60,5 +153,6 @@
 
 
 </script>
+
 
 {% endmacro %}

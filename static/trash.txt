@@ -1,0 +1,142 @@
+import MySQLdb
+
+db = MySQLdb.connect(host="localhost", user="root", passwd="", db="scoutlab")
+cur = db.cursor(MySQLdb.cursors.DictCursor)
+
+# sql = 'select * from products where pid<23010011'
+# sql = 'SELECT * FROM products limit 0, 30'
+low = 40
+up = 60
+val = 'products'
+sql = """SELECT * FROM %s limit %s, %s""" % (val, low, up)
+# sql = "select * from %s limit %s, %s;" % (val, low, up)
+# sql2 = 'select * from links where pid<23010011>'
+
+cur.execute(sql)
+user = cur.fetchall()
+print(user)
+
+# @app.route('/')
+# def index():
+#     with app.app_context():
+#         res = dict(zip(tuple(range(0, 11)), user))
+#         temp = jsonify(res)
+#         return temp
+
+
+# with open('data/post.json', 'w', encoding='utf-8') as f:
+#     json.dump(res, f, ensure_ascii=False, indent=4)
+
+
+
+# def:
+
+def df_maker(df, pname):
+    p_df = df.loc[df['title'] == pname]
+    return p_df
+
+
+def df_filter(df, flag):
+    if flag == 0:
+        return df[df.rating <= 3]
+    else:
+        return df[df.rating > 3]
+
+
+def word_breaker(li, stopword):
+    newr = []
+    for i in li:
+        newr.append(i.lower())
+
+    filtered_words = []
+    # stop word removal
+    for ele in newr:
+        if ele not in stopword:
+            filtered_words.append(ele)
+
+    fil = [word for word in filtered_words if word not in stopwords.words('english')]
+    sno = nltk.stem.SnowballStemmer('english')
+    sm = []
+    for i in fil:
+        # stemming
+        sm.append(sno.stem(i))
+
+    return sm
+
+
+def word_finder(df, col):
+    li = df[col].tolist()
+    tokenr = []
+    for ele in li:
+        # tokenize
+        tokenr.append(np.array(nltk.word_tokenize(ele)))
+
+    mat = np.array(tokenr)
+    out = np.concatenate(mat).ravel().tolist()
+    # change 'stopword' -> stopword
+    word_list = word_breaker(out, 'stopword')
+    if col == 'promise':
+        # remove duplicates from desc
+        word_list = set(word_list)
+        word_list = list(word_list)
+
+    return word_list
+
+
+def match(desc_li, rev_li):
+    # hash table
+    hash_match = {}
+    for word in desc_li:
+        if rev_li.count(word) > 1:
+            if hash_match.get(word) is None:
+                hash_match[word] = rev_li.count(word)
+    # number of matched words / total words in desc = ratio of delivery
+    return len(hash_match) / len(desc_li)
+
+
+# db_api
+
+cur.execute(sql)
+    cur_img.execute(sql_img)
+    image = cur_img.fetchall()
+    user = cur.fetchall()
+    with app.app_context():
+        res = dict(zip(tuple(range(0, 30)), user))
+
+    with open('C:\scoutlab\data\post.json', 'w', encoding='utf-8') as f:
+        json.dump(res, f, ensure_ascii=False, indent=4)
+
+    with app.app_context():
+        res_img = dict(zip(tuple(range(0, 30)), image))
+    # end
+    with open('C:\scoutlab\data\display_image.json', 'w', encoding='utf-8') as f:
+        json.dump(res_img, f, ensure_ascii=False, indent=4)
+
+    print(res)
+
+
+{% from 'post.html' import paste_post %}
+{% for id in data %}
+    {{ paste_post(id, data[id]["pname"], data[id]["eff_pos"], data[id]["rcount"], data[id]["r_score"], img[id]["link"]) }}
+{% endfor %}
+
+
+# sql_img = create_query('links', low, 30)
+# (sql for db, file path for dumping json in it)
+# db_api(sql_img, 'C:\scoutlab\data\display_image.json')
+# img = get_data('C:\scoutlab\data\display_image.json')
+
+
+# sql = ("select * from %s limit %s, %s;" % (table, low, size))
+
+
+
+<div class="graph fill">
+    <div class="card-head modal-card  fill">
+        <canvas id="myChart" height="350" width="400"></canvas>
+    </div>
+    <div class="card-head modal-card  fill"  style="flex-flow:column;">
+        <canvas id="pie_chart" width="500" height="500"></canvas>
+
+    </div>
+</div>

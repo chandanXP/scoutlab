@@ -1,0 +1,72 @@
+{
+    "0": {
+        "pid": 23010075,
+        "pname": "Boult Audio AirBass GearPods with 32H Playtime Bluetooth Headset",
+        "pos_count": 778,
+        "neg_count": 702,
+        "diff": 76
+    },
+    "1": {
+        "pid": 23010115,
+        "pname": "Noise Buds VS202 with 13mm driver,Hyper Sync and Fast Charge Bluetooth Headset",
+        "pos_count": 137,
+        "neg_count": 63,
+        "diff": 74
+    },
+    "2": {
+        "pid": 23010150,
+        "pname": "JBL Tune 125BT Flex Neckband with 16 Hour Playtime, Quick Charge, Multipoint Connect Bluetooth Headset",
+        "pos_count": 268,
+        "neg_count": 209,
+        "diff": 59
+    },
+    "3": {
+        "pid": 23010159,
+        "pname": "SONY WI-C100 with 25 Hours Battery Life Bluetooth Headset",
+        "pos_count": 206,
+        "neg_count": 158,
+        "diff": 48
+    },
+    "4": {
+        "pid": 23010195,
+        "pname": "Grostar Earbuds In-ear Sensor Bluetooth Touch Control Headset With Charging Case Bluetooth Headset",
+        "pos_count": 357,
+        "neg_count": 323,
+        "diff": 34
+    },
+    "5": {
+        "pid": 23010110,
+        "pname": "SONY WI-C100 with 25 Hours Battery Life Bluetooth Headset",
+        "pos_count": 134,
+        "neg_count": 110,
+        "diff": 24
+    },
+    "6": {
+        "pid": 23010130,
+        "pname": "JBL Wave 200 TWS, 20Hr Playback,Deep Bass,Dual Connect,Touch Controls and VA Support Bluetooth Headset",
+        "pos_count": 54,
+        "neg_count": 44,
+        "diff": 10
+    },
+    "7": {
+        "pid": 23010121,
+        "pname": "Tiitan S9 Wired Headset",
+        "pos_count": 87,
+        "neg_count": 83,
+        "diff": 4
+    },
+    "8": {
+        "pid": 23010156,
+        "pname": "Noise Buds VS202 with 13mm driver,Hyper Sync and Fast Charge Bluetooth Headset",
+        "pos_count": 200,
+        "neg_count": 198,
+        "diff": 2
+    },
+    "9": {
+        "pid": 23010224,
+        "pname": "SAMSUNG Original EHS61 Wired Headset",
+        "pos_count": 30,
+        "neg_count": 28,
+        "diff": 2
+    }
+}
